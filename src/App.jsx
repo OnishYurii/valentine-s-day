@@ -5,8 +5,8 @@ import emailjs from 'emailjs-com';
 const App = () => {
   const [clickOnBtnYes, setclickOnBtnYes] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [yesWidth, setYesWidth] = useState(100);
-  const [yesHight, setYesHight] = useState(50);
+  const [yesPaddingVertical, setYesPaddingVertical] = useState(13);
+  const [yesPaddingHorizontal, setYesPaddingHorizontal] = useState(30);
   const [yesFont, setYesFont] = useState(20);
   const [noButtonTextIndex, setNoButtonTextIndex] = useState(0);
   const [text, setText] = useState('Натисни на Подарунок😉');
@@ -38,12 +38,12 @@ const App = () => {
   };
 
   const handleClickNo = () => {
-    setYesWidth(prevSize => {
-      return `${parseInt(prevSize) + 10}px`;
+    setYesPaddingVertical(prevSize => {
+      return `${parseInt(prevSize) + 2}px`;
     });
 
-    setYesHight(prevSize => {
-      return `${parseInt(prevSize) + 10}px`;
+    setYesPaddingHorizontal(prevSize => {
+      return `${parseInt(prevSize) + 2}px`;
     });
 
     setYesFont(prevSize => {
@@ -90,7 +90,13 @@ const App = () => {
               <button
                 className="btnYes"
                 onClick={handleClickYes}
-                style={{ width: yesWidth, height: yesHight, fontSize: yesFont }}
+                style={{
+                  paddingTop: yesPaddingVertical,
+                  paddingBottom: yesPaddingVertical,
+                  paddingLeft: yesPaddingHorizontal,
+                  paddingRight: yesPaddingHorizontal,
+                  fontSize: yesFont,
+                }}
               >
                 Так
               </button>
