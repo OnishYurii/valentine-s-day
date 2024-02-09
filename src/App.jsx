@@ -5,7 +5,22 @@ import emailjs from 'emailjs-com';
 const App = () => {
   const [clickOnBtnYes, setclickOnBtnYes] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [yesWidth, setYesWidth] = useState(100);
+  const [yesHight, setYesHight] = useState(50);
+  const [yesFont, setYesFont] = useState(20);
+  const [noButtonTextIndex, setNoButtonTextIndex] = useState(0);
   const [text, setText] = useState('Натисни на Подарунок😉');
+
+  const noButtonTexts = [
+    'Ні',
+    'Ти впевнена??',
+    'Дійсно впевнена?🥺',
+    'Ну будь ласка😭',
+    'Ти нормальна?😄',
+    'Просто поміркуй🙄',
+    'Я буду дуже засмучений😰',
+    'БУДЬ ЛАСКА, натисни ТАК',
+  ];
 
   const sendEmail = () => {
     emailjs.send(
@@ -20,6 +35,23 @@ const App = () => {
 
   const handleClickYes = () => {
     setclickOnBtnYes(true);
+  };
+
+  const handleClickNo = () => {
+    setYesWidth(prevSize => {
+      return `${parseInt(prevSize) + 10}px`;
+    });
+
+    setYesHight(prevSize => {
+      return `${parseInt(prevSize) + 10}px`;
+    });
+
+    setYesFont(prevSize => {
+      return `${parseInt(prevSize) + 10}px`;
+    });
+
+    const nextIndex = (noButtonTextIndex + 1) % noButtonTexts.length;
+    setNoButtonTextIndex(nextIndex);
   };
 
   const handleConfetti = () => {
@@ -55,12 +87,18 @@ const App = () => {
           <p>Будеш моєю Валентинкою?🥰</p>
           <ul className="btnList">
             <li>
-              <button className="btnYes" onClick={handleClickYes}>
+              <button
+                className="btnYes"
+                onClick={handleClickYes}
+                style={{ width: yesWidth, height: yesHight, fontSize: yesFont }}
+              >
                 Так
               </button>
             </li>
             <li>
-              <button className="btnNo">Ні</button>
+              <button className="btnNo" onClick={handleClickNo}>
+                {noButtonTexts[noButtonTextIndex]}
+              </button>
             </li>
           </ul>
         </div>
